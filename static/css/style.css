@@ -38,9 +38,19 @@ header {
 }
 
 h1 {
-    color: #333;
     font-size: 2.2em;
     margin: 0;
+    background: linear-gradient(to right, #4CAF50, #81C784);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Fallback for browsers that don't support background-clip: text */
+@supports not (-webkit-background-clip: text) and (not (background-clip: text)) {
+    h1 {
+        color: #4CAF50;
+    }
 }
 
 .tagline {
