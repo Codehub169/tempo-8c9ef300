@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Summary - Results</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://images.unsplash.com/photo-1611162616805-65353b20b81e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&q=80" alt="Bot Logo" class="logo-icon">
+            <h1>Generated Summary</h1>
+        </header>
+
+        {% if summary_data %}
+            <div class="summary-section card">
+                <h3 class="section-title"><i class="material-icons">preview</i> Transcript Preview</h3>
+                <p class="transcript-preview">{{ summary_data.transcript_preview }}</p>
+            </div>
+
+            <div class="summary-section card">
+                <h3 class="section-title"><i class="material-icons">speaker_notes</i> Key Discussion Points</h3>
+                {% if summary_data.key_discussion_points %}
+                    {% if summary_data.key_discussion_points[0] == "No specific key discussion points identified." and summary_data.key_discussion_points|length == 1 %}
+                        <p>{{ summary_data.key_discussion_points[0] }}</p>
+                    {% else %}
+                        <ul class="summary-list">
+                            {% for point in summary_data.key_discussion_points %}
+                                <li>{{ point }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% else %}
+                    <p>No key discussion points data available.</p>
+                {% endif %}
+            </div>
+
+            <div class="summary-section card">
+                <h3 class="section-title"><i class="material-icons">checklist_rtl</i> Action Items</h3>
+                 {% if summary_data.action_items %}
+                    {% if summary_data.action_items[0] == "No specific action items identified." and summary_data.action_items|length == 1 %}
+                        <p>{{ summary_data.action_items[0] }}</p>
+                    {% else %}
+                        <ul class="summary-list">
+                            {% for item in summary_data.action_items %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% else %}
+                     <p>No action items data available.</p>
+                {% endif %}
+            </div>
+
+            <div class="summary-section card">
+                <h3 class="section-title"><i class="material-icons">gavel</i> Decisions Made</h3>
+                {% if summary_data.decisions_made %}
+                    {% if summary_data.decisions_made[0] == "No specific decisions identified." and summary_data.decisions_made|length == 1 %}
+                        <p>{{ summary_data.decisions_made[0] }}</p>
+                    {% else %}
+                        <ul class="summary-list">
+                            {% for decision in summary_data.decisions_made %}
+                                <li>{{ decision }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% else %}
+                    <p>No decisions made data available.</p>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="card error-message">
+                 <p>No summary data available. An error might have occurred during processing. Please try again.</p>
+            </div>
+        {% endif %}
+
+        <a href="/" class="back-button button-style">
+            <i class="material-icons">arrow_back</i> Summarize Another Transcript
+        </a>
+        <footer>
+            <p>&copy; 2024 Meeting Summary Bot</p>
+        </footer>
+    </div>
+</body>
+</html>

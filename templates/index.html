@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Summary Bot - Input</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://images.unsplash.com/photo-1611162616805-65353b20b81e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&q=80" alt="Bot Logo" class="logo-icon">
+            <h1>Meeting Summary Bot</h1>
+        </header>
+        <p class="tagline">Upload your meeting transcript or paste the text below to get a structured summary instantly!</p>
+
+        <form action="/summarize" method="POST" enctype="multipart/form-data" id="transcriptForm">
+            <div class="form-section card">
+                <h2 class="section-title"><i class="material-icons">upload_file</i> Upload Transcript File</h2>
+                <p class="section-subtitle">Accepted format: .txt only</p>
+                <div class="file-input-wrapper">
+                    <input type="file" name="transcript_file" id="transcript_file" class="file-input-hidden" accept=".txt">
+                    <label for="transcript_file" class="file-input-label button-style">
+                        <i class="material-icons">attach_file</i> Choose File
+                    </label>
+                    <span id="file-name-display" class="file-name-display">No file chosen</span>
+                </div>
+            </div>
+
+            <div class="separator">
+                <span>OR</span>
+            </div>
+
+            <div class="form-section card">
+                <h2 class="section-title"><i class="material-icons">edit_document</i> Paste Transcript Text</h2>
+                <textarea name="transcript_text" id="transcript_text" rows="12" placeholder="Paste your meeting transcript here..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-button button-style">
+                <i class="material-icons">rocket_launch</i> Generate Summary
+            </button>
+        </form>
+
+        <footer>
+            <p>&copy; 2024 Meeting Summary Bot</p>
+        </footer>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</body>
+</html>
